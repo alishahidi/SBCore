@@ -12,6 +12,9 @@ import lombok.experimental.FieldDefaults;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -28,4 +31,15 @@ public class ${entityName}Service extends BaseService<${entityName}Entity, ${ent
     protected BaseMapper<${entityName}Entity, ${entityName}CreateDto, ${entityName}UpdateDto, ${entityName}LoadDto> getMapper() {
         return mapper;
     }
+
+    <#if searchableFields?has_content>
+    @Override
+    protected List<String> getSearchableFields() {
+        return Arrays.asList(
+        <#list searchableFields as field>
+            "${field}"<#sep>, </#sep>
+        </#list>
+        );
+    }
+    </#if>
 }

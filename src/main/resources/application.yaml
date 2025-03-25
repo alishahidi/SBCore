@@ -81,9 +81,7 @@ s3:
     endpoint: https://example.com
     access: access
     secret: secret
-#    endpoint: http://localhost:9000
-#    access: minioadmin
-#    secret: minioadmin
+
 security:
   jwt:
     exp: 86400000

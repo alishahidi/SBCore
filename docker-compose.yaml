@@ -2,17 +2,17 @@ version: latest
 
 services:
   postgres:
-    container_name: api-postgres
+    container_name: sbcore-postgres
     image: postgres:16-alpine
     restart: always
     environment:
       POSTGRES_PASSWORD: test
-      POSTGRES_DB: api
+      POSTGRES_DB: sbcore
     volumes:
       - postgres:/var/lib/postgresql/data
 
   api:
-    container_name: api-api
+    container_name: sbcore-sbcore
     depends_on:
       - postgres
     build: ./
@@ -20,11 +20,11 @@ services:
       - 8080:8080
     environment:
       - JWT_TOKEN=ac7b9c76236ae1e80f181586a980d292a1a6eb14e3beeaa97d01523ef2a571b1
-      - DB_HOST=api-db
+      - DB_HOST=sbcore-db
       - DB_PORT=5432
       - DB_USER=postgres
       - DB_PASS=test
-      - DB_SCHEMA=api
+      - DB_SCHEMA=sbcore
     volumes:
       - maven-repo:/root/.m2
 
