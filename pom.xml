@@ -5,27 +5,37 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.2</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>3.4.2</version>
+        <relativePath/>
     </parent>
     <groupId>com.alishahidi</groupId>
     <artifactId>api</artifactId>
-    <version>v3.0.0</version>
-    <name>api</name>
-    <description>api</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
+    <version>v1.0.0</version>
     <scm>
         <connection/>
         <developerConnection/>
         <tag/>
         <url/>
     </scm>
+
+    <name>SBCore - Spring Boot Core lib</name>
+    <description>A powerful core library for Spring Boot applications with pre-built controllers, security, and utilities.</description>
+    <url>https://github.com/alishahidi/SBCore</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Ali Shahidi</name>
+            <email>alishahidi1376@gmail.com</email>
+        </developer>
+    </developers>
+
     <properties>
         <java.version>21</java.version>
         <org.mapstruct.version>1.6.0</org.mapstruct.version>
