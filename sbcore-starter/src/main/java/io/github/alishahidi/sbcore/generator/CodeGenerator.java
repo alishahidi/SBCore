@@ -87,7 +87,7 @@ public class CodeGenerator {
         try {
             CodeGenerator generator = new CodeGenerator(config);
             generator.generateAll();
-            logger.info("Code generation completed successfully 234234234234234234234324");
+            logger.info("Code generation completed successfully.");
         } catch (Exception e) {
             logger.error("Code generation failed", e);
             throw new CodeGenerationException("Code generation failed", e);
@@ -96,8 +96,8 @@ public class CodeGenerator {
 
     public void generateAll() throws IOException, TemplateException {
         for (EntityModel entity : entities) {
-            logger.info("Generating entity {}", entity.getName());
             if (entity.getGenerate()) {
+                logger.info("Generating entity {}", entity.getName());
                 generateEntityCode(entity);
             }
         }
