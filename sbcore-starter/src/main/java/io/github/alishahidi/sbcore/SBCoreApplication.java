@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -16,9 +17,6 @@ import org.springframework.web.context.request.RequestContextListener;
 @EnableAspectJAutoProxy
 public class SBCoreApplication {
 
-    @Value("${generator.enabled:false}")
-    private boolean generatorEnabled;
-
     @Value("${generator.xmlFolderPath:generate-xmls}")
     private String xmlFolderPath;
 
@@ -27,15 +25,14 @@ public class SBCoreApplication {
     }
 
     @Bean
+    @ConditionalOnProperty(name = "generator.enabled", havingValue = "true")
     public CommandLineRunner startup() {
         return args -> {
-            if (generatorEnabled) {
-                GeneratorConfig config = GeneratorConfig.builder()
-                        .xmlFolderPath(xmlFolderPath)
-                        .build();
+            GeneratorConfig config = GeneratorConfig.builder()
+                    .xmlFolderPath(xmlFolderPath)
+                    .build();
 
-                CodeGenerator.run(config);
-            }
+            CodeGenerator.run(config);
         };
     }
 
