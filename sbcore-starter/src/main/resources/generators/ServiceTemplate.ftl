@@ -1,8 +1,8 @@
 package ${basePackage}.${entityName?lower_case};
 
-import ${basePackage}.core.entity.BaseMapper;
-import ${basePackage}.core.entity.BaseRepository;
-import ${basePackage}.core.entity.BaseService;
+import io.github.alishahidi.sbcore.entity.BaseMapper;
+import io.github.alishahidi.sbcore.entity.BaseRepository;
+import io.github.alishahidi.sbcore.entity.BaseService;
 import ${basePackage}.${entityName?lower_case}.dto.${entityName}CreateDto;
 import ${basePackage}.${entityName?lower_case}.dto.${entityName}LoadDto;
 import ${basePackage}.${entityName?lower_case}.dto.${entityName}UpdateDto;
@@ -11,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -28,4 +31,15 @@ public class ${entityName}Service extends BaseService<${entityName}Entity, ${ent
     protected BaseMapper<${entityName}Entity, ${entityName}CreateDto, ${entityName}UpdateDto, ${entityName}LoadDto> getMapper() {
         return mapper;
     }
+
+    <#if searchableFields?has_content>
+    @Override
+    protected List<String> getSearchableFields() {
+        return Arrays.asList(
+        <#list searchableFields as field>
+            "${field}"<#sep>, </#sep>
+        </#list>
+        );
+    }
+    </#if>
 }

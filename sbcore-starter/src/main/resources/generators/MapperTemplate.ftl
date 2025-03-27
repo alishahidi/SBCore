@@ -1,20 +1,20 @@
 package ${basePackage}.${entityName?lower_case};
 
-import ${basePackage}.core.entity.BaseMapper;
+import io.github.alishahidi.sbcore.entity.BaseMapper;
 import org.mapstruct.*;
 import ${basePackage}.${entityName?lower_case}.dto.*;
 <#assign imports = []>
 <#assign documentIncluded = false>
 <#list relationships as rel>
     <#if rel.document>
-        <#if !imports?seq_contains("${basePackage}.core.document.DocumentMapper")>
-            <#assign imports += ["${basePackage}.core.document.DocumentMapper"]>
+        <#if !imports?seq_contains("io.github.alishahidi.sbcore.document.DocumentMapper")>
+            <#assign imports += ["io.github.alishahidi.sbcore.document.DocumentMapper"]>
         </#if>
-        <#if !imports?seq_contains("${basePackage}.core.document.DocumentDto")>
-            <#assign imports += ["${basePackage}.core.document.DocumentDto"]>
+        <#if !imports?seq_contains("io.github.alishahidi.sbcore.document.DocumentDto")>
+            <#assign imports += ["io.github.alishahidi.sbcore.document.DocumentDto"]>
         </#if>
-        <#if !imports?seq_contains("${basePackage}.core.document.Document")>
-            <#assign imports += ["${basePackage}.core.document.Document"]>
+        <#if !imports?seq_contains("io.github.alishahidi.sbcore.document.Document")>
+            <#assign imports += ["io.github.alishahidi.sbcore.document.Document"]>
         </#if>
     <#else>
         <#if !imports?seq_contains("${rel.relatedEntityPackage}.${rel.relatedEntityName}Mapper")>

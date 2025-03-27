@@ -1,6 +1,6 @@
 package ${basePackage}.${entityName?lower_case};
 
-import ${basePackage}.core.entity.BaseEntity;
+import io.github.alishahidi.sbcore.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

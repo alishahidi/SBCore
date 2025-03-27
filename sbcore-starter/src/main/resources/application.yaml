@@ -3,12 +3,6 @@ jwt:
 
 spring:
   datasource:
-#    url: jdbc:sqlserver://localhost:1414;database=core;encrypt=true;trustServerCertificate=true
-#    # url: jdbc:sqlserver://localhost:1433;database=test;encrypt=true;trustServerCertificate=true
-#    username: test
-#    password: test
-#    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
-
     username: ${DB_USER:user}
     url: jdbc:postgresql://${DB_HOST:host}:${DB_PORT:5432}/${DB_SCHEMA:schema}
     password: ${DB_PASS:pass}
@@ -20,6 +14,7 @@ spring:
     max-lifetime: 1800000
     connection-timeout: 20000
     leak-detection-threshold: 2000
+
   messages:
     basename: messages
   quartz:
@@ -50,7 +45,7 @@ spring:
     show-sql: 'false'
 
   application:
-    name: api
+    name: sbcore
 
   task:
     execution:
@@ -67,7 +62,9 @@ logging:
     org.springframework.security: WARN
     org.springframework.web: INFO
     org.hibernate.SQL: ERROR
+
 server:
+  forward-headers-strategy: native
   error:
     include-message: always
   port: ${APP_PORT:8080}
@@ -75,6 +72,11 @@ server:
     enabled: true
     min-response-size: 1024
     mime-types: text/html, text/xml, text/plain, text/css, application/json, application/javascript
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 
 s3:
   liara:
@@ -102,12 +104,17 @@ image-processor:
   scale: 1.0
 
 generator:
-  run: false
+  enabled: false
+  xmlFolderPath: generate-xmls
+  basePackage: io.github.alishahidi
 
 garbage:
   collector:
     document:
       time: 86400000
+    log:
+      time: 86400000
+      expire: 30
 
 app:
   cors:
@@ -119,5 +126,6 @@ springdoc:
     enabled: ${SWAGGER_UI_ENABLED:false}
   api-docs:
     path: /v3/api-docs
+
 
 

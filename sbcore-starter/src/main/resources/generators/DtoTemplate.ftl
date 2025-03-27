@@ -1,6 +1,6 @@
 package ${basePackage}.${entityName?lower_case}.dto;
 
-import ${basePackage}.core.entity.BaseDto;
+import io.github.alishahidi.sbcore.entity.BaseDto;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;

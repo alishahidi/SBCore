@@ -1,6 +1,6 @@
 package ${basePackage}.${entityName?lower_case};
 
-import ${basePackage}.core.entity.BaseRepository;
+import io.github.alishahidi.sbcore.entity.BaseRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

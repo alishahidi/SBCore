@@ -1,6 +1,6 @@
 <entity>
     <name>Car</name>
-    <generate>true</generate>
+    <generate>false</generate>
     <fields>
         <field>
             <name>name</name>

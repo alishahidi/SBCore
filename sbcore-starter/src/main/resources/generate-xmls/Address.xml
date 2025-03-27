@@ -1,6 +1,6 @@
 <entity>
     <name>Address</name>
-    <generate>true</generate>
+    <generate>false</generate>
     <fields>
         <field>
             <name>street</name>
