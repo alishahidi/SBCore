@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Maven Central Repository
         uses: actions/setup-java@v4
         with:
@@ -19,15 +20,14 @@ jobs:
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SIGNING_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
-      - name: Configure GPG for non-interactive signing
+
+      - name: Setup GPG TTY
         run: |
-          echo "use-agent" >> ~/.gnupg/gpg.conf
-          echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
-          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
-          export GPG_TTY=/dev/tty
-          gpgconf --kill gpg-agent
+          export GPG_TTY=$(tty)
+
       - name: Set version
         run: mvn versions:set -DnewVersion=${{ github.event.release.tag_name }}
+
       - name: Publish package
         run: mvn -P release --batch-mode deploy -DskipTests
         env:
