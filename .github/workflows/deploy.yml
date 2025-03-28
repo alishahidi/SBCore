@@ -17,10 +17,15 @@ jobs:
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SIGNING_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
+      - name: Set GPG_TTY
+        run: echo "export GPG_TTY=$(tty)" >> $GITHUB_ENV
+      - name: Import GPG key
+        run: |
+          echo "$GPG_SIGNING_KEY" | gpg --batch --import
       - name: Set version
         run: mvn versions:set -DnewVersion=${{ github.event.release.tag_name }}
       - name: Publish package
-        run: mvn --batch-mode deploy -DskipTests
+        run: mvn -P release --batch-mode deploy -DskipTests
         env:
           MAVEN_USERNAME: ${{ secrets.CENTRAL_TOKEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.CENTRAL_TOKEN_PASSWORD }}
