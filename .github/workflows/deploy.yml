@@ -21,9 +21,15 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_SIGNING_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
-      - name: Setup GPG TTY
+      - name: Configure GPG for non-interactive signing
         run: |
+          echo "use-agent" >> ~/.gnupg/gpg.conf
+          echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
+          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
           export GPG_TTY=$(tty)
+          gpgconf --kill gpg-agent
+        env:
+          GPG_TTY: /dev/tty
 
       - name: Set version
         run: mvn versions:set -DnewVersion=${{ github.event.release.tag_name }}
