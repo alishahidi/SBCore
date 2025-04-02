@@ -127,5 +127,9 @@ springdoc:
   api-docs:
     path: /v3/api-docs
 
-
+sbcore:
+  async:
+    corePoolSize: 5
+    maxPoolSize: 15
+    queueCapacity: 200
 

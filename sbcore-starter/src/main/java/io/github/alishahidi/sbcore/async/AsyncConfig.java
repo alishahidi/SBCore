@@ -1,5 +1,7 @@
 package io.github.alishahidi.sbcore.async;
 
+import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.TaskDecorator;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
@@ -14,6 +16,30 @@ import java.util.concurrent.Executor;
 @Configuration
 @EnableAsync
 public class AsyncConfig implements AsyncConfigurer {
+
+
+    private final AsyncProperties asyncProperties;
+
+    public AsyncConfig(AsyncProperties asyncProperties) {
+        this.asyncProperties = asyncProperties;
+    }
+
+    @Bean
+    public ThreadPoolTaskExecutor asyncExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(asyncProperties.getCorePoolSize());
+        executor.setMaxPoolSize(asyncProperties.getMaxPoolSize());
+        executor.setQueueCapacity(asyncProperties.getQueueCapacity());
+        executor.setThreadNamePrefix("AsyncThread-");
+        executor.initialize();
+        return executor;
+    }
+
+    @Bean
+    public AsyncUncaughtExceptionHandler asyncExceptionHandler() {
+        return new AsyncExceptionHandler();
+    }
+
 
     @Override
     public Executor getAsyncExecutor() {
