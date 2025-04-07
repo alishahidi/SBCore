@@ -62,6 +62,9 @@ logging:
     org.springframework.security: WARN
     org.springframework.web: INFO
     org.hibernate.SQL: ERROR
+    root: INFO
+  file:
+    path: ./logs
 
 server:
   forward-headers-strategy: native
@@ -77,6 +80,7 @@ server:
       charset: UTF-8
       enabled: true
       force: true
+
 
 s3:
   liara:
